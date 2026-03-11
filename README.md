@@ -44,7 +44,7 @@ fuomo-final-test/
 
 ## Menjalankan Test Secara Lokal
 
-Bisa pakai npm scripts yang sudah disediakan:
+Pakai npm scripts yang sudah disediakan:
 
 ```bash
 # jalankan semua test (semua browser + mobile viewport)
@@ -63,7 +63,7 @@ npm run test:headed
 npm run report
 ```
 
-Atau langsung pakai perintah Playwright:
+Langsung pakai perintah Playwright:
 
 ```bash
 npx playwright test
@@ -128,14 +128,6 @@ Urutan prioritas locator yang dipakai:
 2. **`getByText()`** — untuk identifikasi elemen berdasarkan teks unik yang visible di halaman
 3. **Semantic HTML selectors** — `page.locator('header')`, `page.locator('footer')` untuk elemen yang pakai tag semantik
 
-**Yang dihindari:** XPath, CSS selector yang fragile, index-based selector, `waitForTimeout()`.
-
-### Auto-Waiting & No `waitForTimeout()`
-
-- Tidak ada `waitForTimeout()` di seluruh codebase
-- Semua assertion pakai auto-waiting bawaan Playwright (`toBeVisible()`, `toHaveURL()`, `toHaveTitle()`)
-- Navigasi di-verify lewat `expect(page).toHaveURL()` yang otomatis nunggu URL berubah
-
 ### Screenshot on Failure
 
 - Konfigurasi `screenshot: 'only-on-failure'` di `playwright.config.ts`
@@ -186,9 +178,3 @@ Beberapa asumsi yang dibuat karena akses terbatas ke dokumentasi internal:
 3. **Navigasi desktop vs mobile** — Desktop menampilkan link dengan tooltip text (aria-label `"Go to Creators"`, `"Go to Marketplace"`, `"Go to Support"`). Mobile menampilkan icon-only link dengan aria-label yang lebih pendek (`"Creators"`, `"Marketplace"`, `"Support"`). Tidak ada hamburger menu — icon tetap visible di mobile. Navigasi ke Creators pakai `.or()` untuk handle perbedaan ini.
 
 4. **Hero section** — Diidentifikasi lewat `<h1>` (heading level 1, berisi teks "CREATE CONNECT GROW") dan `<p>` (berisi "FUOMO membantu kreator..."). Kalau copywriting berubah, locator ini perlu di-update di POM.
-
-5. **SPA behavior** — Website kemungkinan SPA (Next.js). Navigasi antar halaman bisa client-side routing. `toHaveURL()` dari Playwright mendukung kedua skenario.
-
-6. **Staging environment** — `fe-stage.fuomo.id` diasumsikan cukup stabil. Retry 2x di CI untuk handle flakiness network/server.
-
-7. **TypeScript** — `tsconfig.json` di-set `strict: true` dan target `ES2022` sesuai standar modern.
