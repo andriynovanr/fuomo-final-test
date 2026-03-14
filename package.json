@@ -8,7 +8,8 @@
     "test:headed": "npx playwright test --headed",
     "test:chromium": "npx playwright test --project=chromium",
     "test:mobile": "npx playwright test --project='Mobile Chrome' --project='Mobile Safari'",
-    "report": "npx playwright show-report"
+    "report": "npx playwright show-report",
+    "test:ui": "npx playwright test --ui"
   },
   "keywords": [],
   "author": "",
