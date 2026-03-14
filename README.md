@@ -167,14 +167,4 @@ Tidak perlu test code terpisah untuk tiap viewport — cukup konfigurasi `projec
 
 ---
 
-## Asumsi
 
-Beberapa asumsi yang dibuat karena akses terbatas ke dokumentasi internal:
-
-1. **HTML structure** — Website pakai `<header>` dan `<footer>` tapi tidak pakai `<nav>`. Area navigasi ada di dalam `<header>` pertama. Konten utama dibungkus `<main>` dengan beberapa `<section>`.
-
-2. **Logo** — Elemen `<img>` dengan alt text `"FUOMO"` (bukan "Logo FUOMO"). Locator pakai `getByRole('img', { name: 'FUOMO' })`.
-
-3. **Navigasi desktop vs mobile** — Desktop menampilkan link dengan tooltip text (aria-label `"Go to Creators"`, `"Go to Marketplace"`, `"Go to Support"`). Mobile menampilkan icon-only link dengan aria-label yang lebih pendek (`"Creators"`, `"Marketplace"`, `"Support"`). Tidak ada hamburger menu — icon tetap visible di mobile. Navigasi ke Creators pakai `.or()` untuk handle perbedaan ini.
-
-4. **Hero section** — Diidentifikasi lewat `<h1>` (heading level 1, berisi teks "CREATE CONNECT GROW") dan `<p>` (berisi "FUOMO membantu kreator..."). Kalau copywriting berubah, locator ini perlu di-update di POM.
